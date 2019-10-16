@@ -16,8 +16,9 @@ after_success:
     - docker build -t mcreach/multi-worker -f ./worker/Dockerfile ./worker
     
     #Logging Docker
-    #echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password_stdin
-    - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password_stdin
+    #docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
+    # --> Non sécurisé, password stocké de façon non crypté dans  /home/travis/.docker/config.json.
     
     #Envoyer les différentes images générer pour la poduction vers Dockerhub
     - docker push mcreach/multi-client
