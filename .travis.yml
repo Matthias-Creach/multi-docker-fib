@@ -10,18 +10,18 @@ script:
     - docker run -e CI=true mcreach/react-test npm run test -- --coverage
     
 after_success:
-    -docker build -t mcreach/multi-client -f ./client/Dockerfile ./client
-    -docker build -t mcreach/multi-server -f ./server/Dockerfile ./server
-    -docker build -t mcreach/multi-nginx  -f ./nginx/Dockerfile  ./nginx
-    -docker build -t mcreach/multi-worker -f ./worker/Dockerfile ./worker
+    - docker build -t mcreach/multi-client -f ./client/Dockerfile ./client
+    - docker build -t mcreach/multi-server -f ./server/Dockerfile ./server
+    - docker build -t mcreach/multi-nginx  -f ./nginx/Dockerfile  ./nginx
+    - docker build -t mcreach/multi-worker -f ./worker/Dockerfile ./worker
     
     #Logging Docker
     #echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password_stdin
-    -docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
+    - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
     
     #Envoyer les différentes images générer pour la poduction vers Dockerhub
-    -docker push mcreach/multi-client
-    -docker push mcreach/multi-server
-    -docker push mcreach/multi-nginx
-    -docker push mcreach/multi-worker
+    - docker push mcreach/multi-client
+    - docker push mcreach/multi-server
+    - docker push mcreach/multi-nginx
+    - docker push mcreach/multi-worker
     
