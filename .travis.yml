@@ -6,7 +6,7 @@ services:
 before_install: 
     - docker build -t mcreach/react-test -f ./client/Dockerfile.dev ./client
     
-scripts:
+script:
     - docker run -e CI=true mcreach/react-test npm run test -- --coverage
     
 after_success:
