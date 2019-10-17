@@ -1,0 +1,35 @@
+{
+    "AWSEBSDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "mcreach/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server", 
+            "image": "mcreach/multi-server",
+            "hostname": "api", 
+            "essential": false
+        },
+        {
+            "name": "worker", 
+            "image": "mcreach/multi-worker",
+            "hostname": "worker", 
+            "essential": false
+        },
+        {
+            "name": "nginx", 
+            "image": "mcreach/multi-nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }
+    ]
+}

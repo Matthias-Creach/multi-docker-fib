@@ -26,3 +26,21 @@ after_success:
     - docker push mcreach/multi-nginx
     - docker push mcreach/multi-worker
     
+    #AWS Deployment
+    
+deploy:
+    provider: elasticbeanstalk
+    region: eu-central-1
+    app: multi-docker
+    env: MultiDocker-env
+    bucket_name: elasticbeanstalk-eu-central-1-231556070134
+    bucket_path: multi-docker
+    on:
+        branch: master
+        
+    access_key_id:
+        secure: $AWS_ACCESS_KEY
+    secret_access_key:
+        secure: $AWS_SECRET_KEY
+
+    
